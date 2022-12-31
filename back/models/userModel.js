@@ -1,5 +1,5 @@
-import mongoose from "mongoose";
-import bcrypt from "bcryptjs";
+const mongoose =require('mongoose');
+const  bcrypt =require('bcryptjs');
 
 const userSchema = mongoose.Schema(
   {
@@ -17,10 +17,18 @@ const userSchema = mongoose.Schema(
       required: true,
     },
     isAdmin: {
-      type: Boolean,
-      required: true,
-      default: false,
-    },
+      type: Boolean, 
+      required:true,
+      default:false,
+  },
+
+  active: {
+    type: Boolean, 
+    default:true,   
+    select:false
+},
+
+
   },
   {
     timestamps: true,
@@ -42,4 +50,4 @@ userSchema.pre("save", async function (next) {
 
 const User = mongoose.model("User", userSchema);
 
-export default User;
+module.exports=User;
