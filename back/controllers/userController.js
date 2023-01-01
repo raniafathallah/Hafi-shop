@@ -86,10 +86,6 @@ const getUserProfile = catchAsync(async (req, res) => {
 // @routes PUT /api/users/profile
 // @access Private
 const updateUserProfile = catchAsync(async (req, res) => {
-////
-
-
-
 
 const updatedUser = await User.findByIdAndUpdate(req.user._id, req.body,
       { new: true, runValidators: true });
