@@ -1,11 +1,25 @@
 const Product =require('../models/productModel');
 const catchAsync = require('../middleware/errorCatchHandler');
-
+const APIFeatures=require('../utils/apiFeatures');
 // @desc Fetch all products
 // @routes GET /api/products
 // @access Public
 const getProducts = catchAsync(async (req, res) => {
-  //add  features
+     const features = new APIFeatures(Product.find({}).populate('user', 'id name'), req.query).filter()
+                                                             .sort()
+                                                             .limitFields()
+                                                             .paginate();
+     const docs = await features.query;
+     res
+         .status(200)
+         .json({
+             status: 'success',
+             results: docs.length,
+             data: {
+                 data: docs
+             }
+         });
+
 });
 
 // @desc Fetch single products
