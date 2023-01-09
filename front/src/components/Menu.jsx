@@ -3,8 +3,39 @@ import ReactDOM from 'react-dom';
 import React from 'react';
 import { Menubar } from 'primereact/menubar';
 import { InputText } from 'primereact/inputtext';
-
+import  { useState } from 'react';
+import { Dialog } from 'primereact/dialog';
+import { Button } from 'primereact/button';
+import { Login } from './Login';
 export const Menu = () => {
+
+     const [displayBasic, setDisplayBasic] = useState(false);
+     const dialogFuncMap = {
+         'displayBasic': setDisplayBasic
+     }
+ 
+     const onClick = (name, position) => {
+         dialogFuncMap[`${name}`](true);
+ 
+     //     if (position) {
+     //         setPosition(position);
+     //     }
+     }
+ 
+     const onHide = (name) => {
+         dialogFuncMap[`${name}`](false);
+     }
+ 
+     const renderFooter = (name) => {
+         return (
+             <div>
+                 <Button label="No" icon="pi pi-times" onClick={() => onHide(name)} className="p-button-text" />
+                 <Button label="Yes" icon="pi pi-check" onClick={() => onHide(name)} autoFocus />
+             </div>
+         );
+     }
+
+
     const items = [
         {
             label: 'Rooms',
@@ -94,7 +125,9 @@ export const Menu = () => {
         ,
         {
             label: 'Sign In',
-
+            command:(event)=>{ 
+               onClick('displayBasic'); 
+            }
         }
     ];
 
@@ -106,10 +139,21 @@ export const Menu = () => {
    
     
 
+   
+
     return (
         <div  >
             <div className="card">
                 <Menubar model={items} start={start}  />
+
+                <div className="dialog-demo">
+            <div className="card">
+
+<Dialog  visible={displayBasic} style={{ width: '50vw' }}  onHide={() => onHide('displayBasic')}>
+     <Login/>
+</Dialog>
+</div>
+        </div>
             </div>
         </div>
     );

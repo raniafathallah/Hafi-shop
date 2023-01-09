@@ -21,7 +21,6 @@ export const Login = () => {
 //         countryservice.getCountries().then(data => setCountries(data));
 //     }, []); 
     
-    // eslint-disable-line react-hooks/exhaustive-deps
 
     const formik = useFormik({
         initialValues: {
@@ -98,15 +97,9 @@ export const Login = () => {
 
             <div className="flex justify-content-center">
                 <div className="card">
-                <h1 className="text-center">Login</h1>
+                    <h1 className="text-center">Sign In</h1>
                     <form onSubmit={formik.handleSubmit} className="p-fluid">
-                        <div className="field">
-                            <span className="p-float-label">
-                                <InputText id="name" name="name" value={formik.values.name} onChange={formik.handleChange} autoFocus className={classNames({ 'p-invalid': isFormFieldValid('name') })} />
-                                <label htmlFor="name" className={classNames({ 'p-error': isFormFieldValid('name') })}>Name*</label>
-                            </span>
-                            {getFormErrorMessage('name')}
-                        </div>
+                 
                         <div className="field">
                             <span className="p-float-label p-input-icon-right">
                                 <i className="pi pi-envelope" />

@@ -2,7 +2,8 @@
 /* FormDemo.css */
 
 .form-demo .card {
-     min-width: 450px;
+     min-width: 90%;
+     display: flow-root;
  }
  .p-menubar.p-component{
     width: 80%;
@@ -30,3 +31,23 @@
          min-width: 0;
      }
  }
+
+ /*  dialog styles  */
+
+.dialog-demo .p-button {
+     margin: 0 .5rem 0 0;
+     min-width: 10rem;
+ }
+ 
+ .dialog-demo p {
+     margin: 0;
+     line-height: 1.5;
+ }
+
+ .dialog-demo .p-dialog .p-button {
+     min-width: 6rem;
+ }
+ #pr_id_4{
+     width: 38vw !important;
+ }
+                 
