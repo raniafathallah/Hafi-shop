@@ -49,9 +49,12 @@ p {
 
 .card {
   margin-bottom: 2rem;
-  display: flex;
   place-content: center;
   background: #fff;
+  position: fixed;
+  z-index: 100000;
+  display: flex;
+  width: 100%;
 }
 
 input[type="number"] {
