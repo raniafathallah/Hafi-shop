@@ -123,7 +123,13 @@ export const Login = () => {
                             <label htmlFor="accept" className={classNames({ 'p-error': isFormFieldValid('accept') })}>I agree to the terms and conditions*</label>
                         </div>
 
-                        <Button type="submit" label="Submit" className="mt-2" />
+                        <Button type="submit" label="Login" className="mt-2" />
+                         <Divider align="center" type="dashed">
+                            <b>or</b>
+                        </Divider>
+                        <Button label="Sign Up" className="p-button-outlined p-button-secondary" />
+
+
                     </form>
                 </div>
             </div>
