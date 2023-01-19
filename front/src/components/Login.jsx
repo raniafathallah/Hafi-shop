@@ -2,41 +2,31 @@ import React, { useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
-import { Dropdown } from 'primereact/dropdown';
-import { Calendar } from 'primereact/calendar';
 import { Password } from 'primereact/password';
 import { Checkbox } from 'primereact/checkbox';
 import { Dialog } from 'primereact/dialog';
 import { Divider } from 'primereact/divider';
 import { classNames } from 'primereact/utils';
-//import { CountryService } from '../service/CountryService';
+import { Navigate, useNavigate } from 'react-router-dom';
+import { postRegistrationApi } from '../services/Authentication/Registration';
+import { postLoginApi } from '../services/Authentication/Login';
 
 export const Login = () => {
-    const [countries, setCountries] = useState([]);
+    const navigate = useNavigate();
     const [showMessage, setShowMessage] = useState(false);
     const [formData, setFormData] = useState({});
-   // const countryservice = new CountryService();
-
-//     useEffect(() => {
-//         countryservice.getCountries().then(data => setCountries(data));
-//     }, []); 
     
-
     const formik = useFormik({
         initialValues: {
-            name: '',
+            name:'',
             email: '',
             password: '',
-            date: null,
-            country: null,
-            accept: false
+            accept:false
         },
         validate: (data) => {
             let errors = {};
 
-            if (!data.name) {
-                errors.name = 'Name is required.';
-            }
+      
 
             if (!data.email) {
                 errors.email = 'Email is required.';
@@ -48,11 +38,6 @@ export const Login = () => {
             if (!data.password) {
                 errors.password = 'Password is required.';
             }
-
-            if (!data.accept) {
-                errors.accept = 'You need to agree to the terms and conditions.';
-            }
-
             return errors;
         },
         onSubmit: (data) => {
@@ -60,6 +45,14 @@ export const Login = () => {
             setShowMessage(true);
 
             formik.resetForm();
+            console.log(data);
+            if(!isLogin)
+            {
+                postRegistrationApi(data);
+            }else{
+                postLoginApi(data);
+            }
+       
         }
     });
 
@@ -82,24 +75,45 @@ export const Login = () => {
             </ul>
         </React.Fragment>
     );
+const [isLogin,setIsLogin]=useState(true);
 
+const signUp=()=>{
+    setIsLogin(false);
+}
+
+const signIn=()=>{
+    setIsLogin(true);
+}
     return (
+        <>
         <div className="form-demo">
             <Dialog visible={showMessage} onHide={() => setShowMessage(false)} position="top" footer={dialogFooter} showHeader={false} breakpoints={{ '960px': '80vw' }} style={{ width: '30vw' }}>
                 <div className="flex align-items-center flex-column pt-6 px-3">
                     <i className="pi pi-check-circle" style={{ fontSize: '5rem', color: 'var(--green-500)' }}></i>
-                    <h5>Registration Successful!</h5>
-                    <p style={{ lineHeight: 1.5, textIndent: '1rem' }}>
+                   {!isLogin&&<h5>Registration Successful!</h5>} 
+                   {isLogin&&<h5>login Successful!</h5>} 
+
+                    {/* <p style={{ lineHeight: 1.5, textIndent: '1rem' }}>
                         Your account is registered under name <b>{formData.name}</b> ; it'll be valid next 30 days without activation. Please check <b>{formData.email}</b> for activation instructions.
-                    </p>
+                    </p> */}
                 </div>
             </Dialog>
-
             <div className="flex justify-content-center">
                 <div className="card">
-                    <h1 className="text-center">Sign In</h1>
+                {isLogin&&<h1 className="text-center">Sign In</h1>}
+
+                {!isLogin&&<h1 className="text-center">Sign Up</h1>}
                     <form onSubmit={formik.handleSubmit} className="p-fluid">
                  
+                   {!isLogin&& <div className="field">
+                            <span className="p-float-label p-input-icon-right">
+                                <i className="" />
+                                <InputText id="name" name="name" value={formik.values.name} onChange={formik.handleChange} className={classNames({ 'p-invalid': isFormFieldValid('name') })} />
+                                <label htmlFor="name" className={classNames({ 'p-error': isFormFieldValid('name') })}>Name*</label>
+                            </span>
+                            {getFormErrorMessage('name')}
+                        </div>}
+
                         <div className="field">
                             <span className="p-float-label p-input-icon-right">
                                 <i className="pi pi-envelope" />
@@ -122,17 +136,22 @@ export const Login = () => {
                             <Checkbox inputId="accept" name="accept" checked={formik.values.accept} onChange={formik.handleChange} className={classNames({ 'p-invalid': isFormFieldValid('accept') })} />
                             <label htmlFor="accept" className={classNames({ 'p-error': isFormFieldValid('accept') })}>I agree to the terms and conditions*</label>
                         </div>
+                  
 
-                        <Button type="submit" label="Login" className="mt-2" />
+                        <Button type="submit" 
+                        label={isLogin?"Sign In":"Sign up"} className="mt-2" />
+
                          <Divider align="center" type="dashed">
                             <b>or</b>
                         </Divider>
-                        <Button label="Sign Up" className="p-button-outlined p-button-secondary" />
-
-
+                        {isLogin&& <Button label="Sign Up" className="p-button-outlined p-button-secondary"  
+                        onClick={()=>{signUp()}}/>}
+                        {!isLogin&& <Button label="Sign In" className="p-button-outlined p-button-secondary"  
+                        onClick={()=>{signIn()}}/>}
                     </form>
                 </div>
             </div>
         </div>
+        </>
     );
 }

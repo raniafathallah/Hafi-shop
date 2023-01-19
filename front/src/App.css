@@ -40,6 +40,12 @@
     /* color: #ffffff; */
     /* font-weight: bold; */
 }
+.hideLink{
+    display: none;
+}
+.activeLink{
+    display: block;
+}
 
 .p-menubar .p-menuitem.p-menuitem-active > .p-menuitem-link {
     background: #efefef;

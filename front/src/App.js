@@ -1,37 +1,30 @@
 import logo from './logo.svg';
 import './App.css';
-import {Menu} from './components/Menu';
-import {CarouselD} from './components/Carousel';
-import { ShopByItem } from './components/ShopByItem';
-import { Newproducts } from './components/Newproducts';
-import { Divider } from 'primereact/divider';
-import { Footer } from './components/Footer';
-
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { postRegistrationApi } from './services/Authentication/Registration';
+import HomePage from './screens/website/HomePage';
+import { Menu } from './components/Menu';
 
 function App() {
   return (
     <>
-    <div className="App">
-      <Menu/>
-      <div className='carousel-container'>
-         <CarouselD/>
-      </div>
-      <div className='product-by-item'>
-        <ShopByItem/>  
-        <Divider />
-        <Newproducts/>
-      </div>
-      <Footer/>
+    <Router>
+        <div className='App'>
+          <Menu />
+          <Routes>
+            <Route path='/' element={<HomePage />} />
+          </Routes>
+        </div>
+      </Router>
 
-
-<div>
-
-</div>
-
-
+      {/* <button onClick={()=>{postRegistrationApi(  {
+    "name": "login",
+    "email": "login@gmail.com",
+    "password":"login123",
+    "isAdmin": true
+  })}}> login</button> */}
     
 
-    </div>
     </>
   );
 }

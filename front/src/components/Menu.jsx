@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Menubar } from 'primereact/menubar';
 import { InputText } from 'primereact/inputtext';
 import  { useState } from 'react';
@@ -8,7 +8,19 @@ import { Dialog } from 'primereact/dialog';
 import { Button } from 'primereact/button';
 import { Login } from './Login';
 export const Menu = () => {
-
+    const [localUser,setLocalUser]=useState();
+    const fetchLocalStorage = async () => {
+        const local_User= await JSON.parse(localStorage.getItem('user'));
+        setLocalUser(local_User);
+         console.log(local_User);
+                }   
+    useEffect(() => {
+        setInterval(() => {
+            fetchLocalStorage();
+        }, 3000);
+    }, []);
+    
+const [isLogin,setIsLogin]=useState(false);
      const [displayBasic, setDisplayBasic] = useState(false);
      const dialogFuncMap = {
          'displayBasic': setDisplayBasic
@@ -17,24 +29,13 @@ export const Menu = () => {
      const onClick = (name, position) => {
          dialogFuncMap[`${name}`](true);
  
-     //     if (position) {
-     //         setPosition(position);
-     //     }
+
      }
  
      const onHide = (name) => {
          dialogFuncMap[`${name}`](false);
      }
  
-     const renderFooter = (name) => {
-         return (
-             <div>
-                 <Button label="No" icon="pi pi-times" onClick={() => onHide(name)} className="p-button-text" />
-                 <Button label="Yes" icon="pi pi-check" onClick={() => onHide(name)} autoFocus />
-             </div>
-         );
-     }
-
 
     const items = [
         {
@@ -127,7 +128,29 @@ export const Menu = () => {
             label: 'Sign In',
             command:(event)=>{ 
                onClick('displayBasic'); 
-            }
+            },
+            className:localUser?"hideLink":"activeLink"
+        },
+        {
+            label:localUser?localUser.name:'',
+            items: localUser?[
+                {
+                    label: 'Change Password',
+                },
+                {
+                    label: 'Account Setting',
+                },
+                {
+                    label: 'Log Out',
+                    command:(event)=>{ 
+                    localStorage.removeItem('user'); 
+                    setTimeout(() => {
+                        window.location.reload();
+                      }, 1000);
+                     }
+                }
+            ]:'',
+
         }
     ];
 
@@ -150,8 +173,9 @@ export const Menu = () => {
             <div className="card">
 
 <Dialog  visible={displayBasic} style={{ width: '50vw' }}  onHide={() => onHide('displayBasic')}>
-     <Login/>
+     <Login  />
 </Dialog>
+
 </div>
         </div>
             </div>
