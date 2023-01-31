@@ -74,3 +74,63 @@ export const newproducts=[{
 ];
      
 
+
+
+
+export const allproducts=[{
+     title:"Modern Sofa1  ",
+     image:"images/newproducts/1.jpg"
+     },
+     {title:"Moder Chair1  ",
+     image:"images/newproducts/2.jpg"
+     },
+     {
+     title:"Modern Sofa2  ",
+     image:"images/newproducts/1.jpg"
+     },
+     {title:"Moder Chair2  ",
+     image:"images/newproducts/2.jpg"
+     },
+     {
+     title:"Modern Sofa3  ",
+     image:"images/newproducts/1.jpg"
+     },
+     {title:"Moder Chair3  ",
+     image:"images/newproducts/2.jpg"
+     },
+     {
+     title:"Modern Sofa4  ",
+     image:"images/newproducts/1.jpg"
+     },
+     {title:"Moder Chair4  ",
+     image:"images/newproducts/2.jpg"
+     },
+     {
+     title:"Modern Sofa5  ",
+     image:"images/newproducts/1.jpg"
+     },
+     {title:"Moder Chair5  ",
+     image:"images/newproducts/2.jpg"
+     },
+     {
+     title:"Modern Sofa6 ",
+     image:"images/newproducts/1.jpg"
+     },
+     {title:"Moder Chair6  ",
+     image:"images/newproducts/2.jpg"
+     },
+     {
+     title:"Modern Sofa7  ",
+     image:"images/newproducts/1.jpg"
+     },
+     {title:"Moder Chair7  ",
+     image:"images/newproducts/2.jpg"
+     },
+     {
+     title:"Modern Sofa8  ",
+     image:"images/newproducts/1.jpg"
+     },
+     {title:"Moder Chair8  ",
+     image:"images/newproducts/2.jpg"
+     }
+];

@@ -72,7 +72,7 @@ const [isLogin,setIsLogin]=useState(false);
                 {
                     label: 'Sofas',
                     command:(event)=>{ 
-                         window.location.hash = "/fileupload"; 
+                        //  window.location.hash = "/fileupload"; 
                     window.alert("dkdkkdk");  
                     }
                 },

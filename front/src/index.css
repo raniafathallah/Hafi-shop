@@ -58,7 +58,6 @@ p {
   margin-bottom: 2rem;
   place-content: center;
   background: #fff;
-  z-index: 100000;
   display: flex;
   width: 100%;
 }

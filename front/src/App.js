@@ -2,8 +2,11 @@ import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { postRegistrationApi } from './services/Authentication/Registration';
-import HomePage from './screens/website/HomePage';
 import { Menu } from './components/Menu';
+
+import HomePage from './screens/website/HomePage';
+import Shop from './screens/website/Shop';
+import { Footer } from './components/Footer/Footer';
 
 function App() {
   return (
@@ -13,18 +16,13 @@ function App() {
           <Menu />
           <Routes>
             <Route path='/' element={<HomePage />} />
+            <Route path='/shop' element={<Shop />} />
           </Routes>
+          <Footer/>
         </div>
       </Router>
 
-      {/* <button onClick={()=>{postRegistrationApi(  {
-    "name": "login",
-    "email": "login@gmail.com",
-    "password":"login123",
-    "isAdmin": true
-  })}}> login</button> */}
-    
-
+  
     </>
   );
 }

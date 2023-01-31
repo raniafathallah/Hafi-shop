@@ -1,0 +1,86 @@
+.filter-container
+{
+    width: 80%;
+    margin: 0% 10%;
+    /* z-index: -1;
+    position: relative; */
+}
+.p-dataview-content>div{
+margin-right: .5%;
+}
+.product-img,.w-9{
+    width: 100% !important;
+    height: 365px;
+    margin-top: unset !important;
+}
+.p-rating{
+    place-content: center;
+}
+.add-margin{
+    margin: 10px;
+}
+.product-block
+{
+    width: 24%;
+    margin: .5%;
+}
+.raw-list-small{
+    max-height: 160px;
+}
+
+.p-rating .p-rating-item.p-rating-item-active .p-rating-icon {
+    color: #1741a4;
+}
+.product-title {
+    font-size: 1.8rem !important;
+    color:#3f5893;
+}
+.product-price
+{
+    color: #aba6a6;
+}
+.products-container{
+    display: flex;
+}
+.filter-methods-container{
+    padding: 10px;
+    background: #fff;
+    margin: 0px 10px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/*  accordin */
+
+.p-accordion-header-link{
+    display: inline-flex;
+    flex-direction: row-reverse;
+    background: transparent !important;
+    border: none !important;
+}
+.p-accordion-header-text {
+    margin-right: 5px;
+}
+.p-accordion-content{
+    border: none !important;
+
+}
+.accordian-filter{
+    margin-top: 20px;
+}
+.p-accordion-tab{    margin-top: 10px;}
+.p-accordion .p-accordion-header:not(.p-disabled) .p-accordion-header-link:focus {
+    box-shadow: none !important;
+}
+
+.clear-btn{
+    background: none;
+    color: #bd3333;
+    border: none;
+    text-decoration: solid;
+}
+.clear-btn:hover{
+    background: transparent !important;
+    color: #6c757d !important;
+}

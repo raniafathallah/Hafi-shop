@@ -116,8 +116,9 @@ export const Menu = () => {
                             label: 'Delete',
                             icon: 'pi pi-fw pi-calendar-minus',
                             command:(event)=>{ 
-                              window.location.hash = "/fileupload"; 
-                         window.alert("dkdkkdk");                       }}
+                            //   window.location.hash = "/fileupload"; 
+                        //  window.alert("dkdkkdk");     
+                                      }}
                     ]
                 },
                 {

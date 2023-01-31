@@ -1,7 +1,7 @@
 import { Divider } from 'primereact/divider'
 import React from 'react'
 import { CarouselD } from '../../components/Carousel'
-import { Footer } from '../../components/Footer'
+import { Footer } from '../../components/Footer/Footer'
 import { Menu } from '../../components/Menu'
 import { Newproducts } from '../../components/Newproducts'
 import { ShopByItem } from '../../components/ShopByItem'

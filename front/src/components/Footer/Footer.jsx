@@ -1,6 +1,6 @@
 import { Divider } from 'primereact/divider'
 import React from 'react'
-
+import "./Footer.css";
 export const Footer = () => {
   return (
     <>
