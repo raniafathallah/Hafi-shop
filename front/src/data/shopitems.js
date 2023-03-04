@@ -74,9 +74,6 @@ export const newproducts=[{
 ];
      
 
-
-
-
 export const allproducts=[{
      title:"Modern Sofa1  ",
      image:"images/newproducts/1.jpg"

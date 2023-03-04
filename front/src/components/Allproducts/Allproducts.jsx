@@ -20,7 +20,8 @@ import { Accordion, AccordionTab } from 'primereact/accordion';
 
 import { Checkbox } from "primereact/checkbox";
 
-
+import { getAllProductsApi } from '../../services/Products/GetAllProducts';
+import { GetProductsBasedCategory } from '../../services/Products/GetProductsBasedCategory';
 const Allproducts = () => {
 
     function valuetext(value) {
@@ -38,7 +39,6 @@ const Allproducts = () => {
         { name: 'Bed Room', key: 'A' },
         { name: 'Dining Room', key: 'M' },
         { name: 'Living Room', key: 'P' }
-        // { name: 'Research', key: 'R' }
     ];
     const categories2 = [
         { name: 'Classic', key: 'A' },
@@ -55,11 +55,51 @@ const Allproducts = () => {
             _selectedCategories = _selectedCategories.filter(category => category.key !== e.value.key);
 
         setSelectedCategories(_selectedCategories);
+        alert(_selectedCategories.name);
     };
     //  checkbox
 
 
-    const [products, setProducts] = useState(allproducts);
+
+    const [products, setProducts] = useState();
+
+    const fetchLocalProducts = async () => {
+        getAllProductsApi();
+        const local_Products= await JSON.parse(localStorage.getItem('products'));
+        setProducts(local_Products.data.data);
+         console.log(local_Products);
+    } 
+
+    const fetchLocalProductsByCategory = async () => {
+        GetProductsBasedCategory('Electronics');
+        const local_Products= await JSON.parse(localStorage.getItem('newproducts'));
+        setProducts(local_Products.data.data);
+         console.log(local_Products);
+    } 
+
+
+    useEffect(() => {
+         
+        fetchLocalProducts();
+    
+      return () => {
+        localStorage.removeItem('products'); 
+      }
+    }, [])
+
+    useEffect(() => {
+        setTimeout(() => {
+            fetchLocalProductsByCategory();
+
+        }, 2000);
+
+      return () => {
+                localStorage.removeItem('products'); 
+
+      }
+    }, [])
+    
+    
     const [layout, setLayout] = useState('grid');
     const [sortKey, setSortKey] = useState(null);
     const [sortOrder, setSortOrder] = useState(null);
@@ -154,6 +194,13 @@ const Allproducts = () => {
                 {/* <div className="col-6" style={{ textAlign: 'left' }}>
                     <Dropdown options={sortOptions} value={sortKey} optionLabel="label" placeholder="Sort By Price" onChange={onSortChange} />
                 </div> */}
+
+ddd
+           {selectedCategories.map(ele=>
+            <div>
+                {ele.name}ss
+                </div>
+           )}
                 <div className="col-12" style={{ textAlign: 'right' }}>
                     <DataViewLayoutOptions layout={layout} onChange={(e) => setLayout(e.value)} />
                 </div>

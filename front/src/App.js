@@ -7,6 +7,7 @@ import { Menu } from './components/Menu';
 import HomePage from './screens/website/HomePage';
 import Shop from './screens/website/Shop';
 import { Footer } from './components/Footer/Footer';
+import Dashboard from './screens/admin/Dashboard/Dashboard';
 
 function App() {
   return (
@@ -17,12 +18,11 @@ function App() {
           <Routes>
             <Route path='/' element={<HomePage />} />
             <Route path='/shop' element={<Shop />} />
+            <Route path='/admin/dashboard' element={<Dashboard />} />
           </Routes>
           <Footer/>
         </div>
       </Router>
-
-  
     </>
   );
 }
