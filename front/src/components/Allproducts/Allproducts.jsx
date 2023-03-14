@@ -2,18 +2,13 @@
 import React, { useState, useEffect } from 'react';
 import { DataView, DataViewLayoutOptions } from 'primereact/dataview';
 import { Button } from 'primereact/button';
-import { Dropdown } from 'primereact/dropdown';
-//import { ProductService } from './service/ProductService';
 import { Rating } from 'primereact/rating';
-//import './DataViewDemo.css';
 import { allproducts } from '../../data/shopitems';
 import { MultiSelect } from 'primereact/multiselect';
 import './Allproducts.css';
-// * as React from 'react';
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
 
-//import MultiRangeSlider from "./component/multiRangeSlider/MultiRangeSlider";
 import MultiRangeSlider from '../MultiRangeSlider/MultiRangeSlider';
 
 import { Accordion, AccordionTab } from 'primereact/accordion';
@@ -36,15 +31,15 @@ const Allproducts = () => {
 
     // check box 
     const categories = [
-        { name: 'Bed Room', key: 'A' },
-        { name: 'Dining Room', key: 'M' },
-        { name: 'Living Room', key: 'P' }
+        { name: 'Bed', key: 'A',query:'Bed' },
+        { name: 'Dining', key: 'M',query:'Dining' },
+        { name: 'Living', key: 'P' ,query:'Living'}
     ];
     const categories2 = [
         { name: 'Classic', key: 'A' },
         { name: 'Modern', key: 'M' }
     ];
-    const [selectedCategories, setSelectedCategories] = useState([categories[1]]);
+    const [selectedCategories, setSelectedCategories] = useState([]);
 
     const onCategoryChange = (e) => {
         let _selectedCategories = [...selectedCategories];
@@ -55,7 +50,7 @@ const Allproducts = () => {
             _selectedCategories = _selectedCategories.filter(category => category.key !== e.value.key);
 
         setSelectedCategories(_selectedCategories);
-        alert(_selectedCategories.name);
+        // alert(_selectedCategories.name);
     };
     //  checkbox
 
@@ -64,40 +59,48 @@ const Allproducts = () => {
     const [products, setProducts] = useState();
 
     const fetchLocalProducts = async () => {
+
+        localStorage.removeItem('newproducts'); 
+
         getAllProductsApi();
         const local_Products= await JSON.parse(localStorage.getItem('products'));
         setProducts(local_Products.data.data);
          console.log(local_Products);
     } 
 
-    const fetchLocalProductsByCategory = async () => {
-        GetProductsBasedCategory('Electronics');
+    const fetchLocalProductsByCategory = async () => { 
+         let categoresQuery=selectedCategories.map(ele=> 
+               `category=${ele.name}`
+           )
+
+           const categoresQueries = categoresQuery.reduce((result, item) => {
+            return `${result}${item}&`
+          }, "")
+
+       await GetProductsBasedCategory(categoresQueries);
         const local_Products= await JSON.parse(localStorage.getItem('newproducts'));
         setProducts(local_Products.data.data);
          console.log(local_Products);
     } 
 
-
-    useEffect(() => {
-         
-        fetchLocalProducts();
-    
-      return () => {
-        localStorage.removeItem('products'); 
-      }
-    }, [])
-
-    useEffect(() => {
-        setTimeout(() => {
+     useEffect(() => {
             fetchLocalProductsByCategory();
 
-        }, 2000);
+
+    return () => {
+                localStorage.removeItem('products'); 
+
+    }
+    }, []);
+    useEffect(() => {
+            fetchLocalProductsByCategory();
+
 
       return () => {
                 localStorage.removeItem('products'); 
 
       }
-    }, [])
+    }, [selectedCategories])
     
     
     const [layout, setLayout] = useState('grid');
@@ -110,7 +113,6 @@ const Allproducts = () => {
     ];
 
     const FilterBasedOnPrice=()=>{
-       alert('wowwww filter');
     }
 
     useEffect(() => {
@@ -191,16 +193,6 @@ const Allproducts = () => {
        
          
             <div className="grid grid-nogutter">
-                {/* <div className="col-6" style={{ textAlign: 'left' }}>
-                    <Dropdown options={sortOptions} value={sortKey} optionLabel="label" placeholder="Sort By Price" onChange={onSortChange} />
-                </div> */}
-
-ddd
-           {selectedCategories.map(ele=>
-            <div>
-                {ele.name}ss
-                </div>
-           )}
                 <div className="col-12" style={{ textAlign: 'right' }}>
                     <DataViewLayoutOptions layout={layout} onChange={(e) => setLayout(e.value)} />
                 </div>

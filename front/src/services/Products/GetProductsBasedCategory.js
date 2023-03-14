@@ -5,9 +5,9 @@
 import axios from "axios";
 
 export const GetProductsBasedCategory = async (data) => {
-  console.log("Data: ", data);
+  console.log("Data is : ", data);
   try {
-    const response = await axios.get('api/products?category=Electronics');
+    const response = await axios.get(`api/products?${data}`);
       console.log("Response register cat: ", response.data);
    // const results=response.data.data.data;
   //  console.log("Response registerreee : ", results);
