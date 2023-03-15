@@ -1,15 +1,19 @@
 
 import axios from "axios";
+import { useState ,useEffect} from "react";
 import { GetUsers } from "../../config";
 
 export const getUsers = async () => {
+     console.log("in=side getusers");
      try {
-const token='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYzQ3ZGIwMmY0YWUxMzRiYjY4MzBjNSIsImlhdCI6MTY3ODgxMDEzNSwiZXhwIjoxNjgxNDAyMTM1fQ.TLXpNq31K7We5WNUPbm0q9UMzmdWp3ahZD2GePOLTZ0';
-    
-let config = {
+
+           const local_User= await JSON.parse(localStorage.getItem('user'));
+           // console.log("rtoken"+local_User.token);
+      let config = {
      headers: {
-       'Authorization': 'Bearer ' + token
+       'Authorization': 'Bearer '+local_User.token
      }
+     // user:local_User
    }
 
 //const response = await axios.get(GetUsers);

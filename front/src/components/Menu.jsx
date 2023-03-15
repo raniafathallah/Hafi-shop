@@ -7,7 +7,13 @@ import  { useState } from 'react';
 import { Dialog } from 'primereact/dialog';
 import { Button } from 'primereact/button';
 import { Login } from './Login';
+
+import { useNavigate } from "react-router-dom";
+
 export const Menu = () => {
+    const navigate = useNavigate();
+
+    
     const [localUser,setLocalUser]=useState();
     const fetchLocalStorage = async () => {
         const local_User= await JSON.parse(localStorage.getItem('user'));
@@ -68,12 +74,14 @@ const [isLogin,setIsLogin]=useState(false);
             items: [
                 {
                     label: 'Chairs',
+                    command:(event)=>{ 
+                        navigate('/shop'); 
+                    }
                 },
                 {
                     label: 'Sofas',
                     command:(event)=>{ 
-                        //  window.location.hash = "/fileupload"; 
-                    window.alert("dkdkkdk");  
+                        navigate('/shop'); 
                     }
                 },
                 {
@@ -88,11 +96,17 @@ const [isLogin,setIsLogin]=useState(false);
                                     label: 'Print',
                                     icon: 'pi pi-fw pi-print'
                                 }
-                            ]
+                            ],
+                            command:(event)=>{ 
+                                navigate('/shop'); 
+                            }
                         },
                         {
                             icon: 'pi pi-fw pi-bars',
-                            label: 'List'
+                            label: 'List',
+                            command:(event)=>{ 
+                                navigate('/shop'); 
+                            }
                         }
                     ]
                 }
@@ -155,7 +169,7 @@ const [isLogin,setIsLogin]=useState(false);
     ];
 
     const start = <div style={{display:'flex'}}>
-     <img alt="logo" src="/images/logo.png" 
+     <img alt="logo" src="/images/logo.png" onClick={()=>{navigate("/shop")}}
      onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} height="40" className="mr-2"></img>
      <InputText placeholder="Search" type="text" />
     </div>;
